@@ -1,0 +1,1 @@
+# plugins-eli-php-compatibility-scanner
