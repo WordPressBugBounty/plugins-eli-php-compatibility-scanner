@@ -1,0 +1,48 @@
+Changelog for Eli's PHP Compatibility Scanner
+
+readme.txt carries the two most recent releases; every older release is kept
+here. When a new version ships, the oldest entry still in readme.txt moves down
+into this file, so each release appears in exactly one of the two.
+
+The split exists because WordPress.org parses the Changelog out of readme.txt
+and readme.txt has a ~10 KB soft ceiling. Keeping the full history there would
+breach it.
+
+= 1.1.3 =
+* Fix: "Unable to run phpcs --version with detected PHP binary" on LocalWP/macOS. PHP_BINARY pointed to php-fpm, a server SAPI that cannot run CLI scripts; the scanner now resolves the CLI php binary from the same PHP install.
+* Tested up to WordPress 7.0.
+
+= 1.1.2 =
+* Fix: Wrong php exec detected in some XAMPP environments
+
+= 1.1.1 =
+* Fix: scan overview tags no longer disappear after scan completes; selected targets and their results stay visible.
+
+= 1.1.0 =
+* Scan Overview UI Update
+
+= 1.0.5 =
+* Improved target selection: show Active badge for active plugins/theme; add Select All (toggle) and Select Active buttons.
+
+= 1.0.4 =
+* Fix "Namespace declaration statement has to be the very first statement" when running phpcs on some hosts (e.g. LiteSpeed): plugin now prefers the direct PHPCS script over the Composer proxy to avoid BOM/encoding issues in vendor/bin/phpcs.
+
+= 1.0.3 =
+* Fix "ERROR: The file 2>&1 does not exist" on macOS when PHPCS command runs without a shell (removed shell redirection from command string)
+* Fix PHP 8.1+ deprecation: trim() null parameter in PHP_CodeSniffer vendor (Common.php)
+* Tested on latest WordPress and WordPress Studio for Mac
+
+= 1.0.2 =
+* Updated plugin name to "Eli's PHP Compatibility Scanner" for WordPress.org compliance
+* Improved documentation and usage instructions
+
+
+= 1.0.0 =
+* Initial release
+* PHP compatibility scanning using PHPCompatibility standard
+* Modern, responsive user interface
+* Batch processing for large codebases
+* Real-time progress updates
+* Stop/resume functionality
+* Vendor directory exclusion
+* Support for PHP versions 7.4-8.4

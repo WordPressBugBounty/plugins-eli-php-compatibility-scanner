@@ -1,0 +1,240 @@
+/*!
+ * CoffeeWP Admin Promo — card styles.
+ *
+ * Inlined by Rail::enqueue(). Scoped under .cwp-promo-rail so it cannot leak
+ * into a host plugin's own admin styles. The host owns the sidebar column and
+ * its width; nothing here sets layout beyond the stack of cards.
+ *
+ * Per-card colour arrives as two custom properties set inline by the renderer:
+ *   --cwp-stripe  brand hex, draws the left edge and the title
+ *   --cwp-fill    darkened step, fills the button so white text clears 4.5:1
+ */
+
+.cwp-promo-rail {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.cwp-promo {
+	background: #fff;
+	/* No outline — the accent edge and the shadow carry the card. */
+	border: 0;
+	border-left: 4px solid var(--cwp-stripe, #c3c4c7);
+	border-radius: 5px;
+	padding: 13px 15px;
+	box-sizing: border-box;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cwp-promo__title {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	margin-bottom: 9px;
+	color: var(--cwp-stripe, #1d2327);
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.cwp-promo p {
+	margin: 0 0 9px;
+	color: #1d2327;
+	font-size: 12.5px;
+	line-height: 1.5;
+}
+
+.cwp-promo p:last-child {
+	margin-bottom: 0;
+}
+
+.cwp-promo__list {
+	margin: 0 0 11px;
+	padding-left: 17px;
+	font-size: 12.5px;
+	list-style: disc;
+}
+
+.cwp-promo__list li {
+	margin-bottom: 4px;
+}
+
+.cwp-promo__list li::marker {
+	color: var(--cwp-stripe);
+}
+
+/* Text left, call to action locked right. */
+.cwp-promo__row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 10px 0 0;
+	border-top: 1px solid #f1f1f1;
+}
+
+.cwp-promo__title + .cwp-promo__row {
+	border-top: 0;
+	padding-top: 0;
+}
+
+.cwp-promo__text {
+	font-size: 12.5px;
+	line-height: 1.5;
+}
+
+.cwp-promo__stars {
+	color: #e5a317;
+	letter-spacing: -1px;
+}
+
+.cwp-promo__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	flex: 0 0 108px;
+	box-sizing: border-box;
+	padding: 10px 14px;
+	border-radius: 5px;
+	background: var(--cwp-fill, #50575e);
+	color: #fff;
+	font-size: 12.5px;
+	font-weight: 500;
+	line-height: 1.25;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background-color 150ms ease, filter 150ms ease, transform 150ms ease;
+}
+
+.cwp-promo__btn:hover,
+.cwp-promo__btn:focus {
+	background: var(--cwp-fill, #50575e);
+	color: #fff;
+	filter: brightness(0.92);
+	transform: translateY(-2px);
+}
+
+/* The lift is decoration, not information — drop it when motion is unwanted. */
+@media (prefers-reduced-motion: reduce) {
+	.cwp-promo__btn {
+		transition: none;
+	}
+
+	.cwp-promo__btn:hover,
+	.cwp-promo__btn:focus {
+		transform: none;
+	}
+}
+
+.cwp-promo__btn:focus-visible {
+	outline: 2px solid #1d2327;
+	outline-offset: 2px;
+}
+
+.cwp-promo__btn.is-wide {
+	display: flex;
+	flex: 1 1 auto;
+	width: 100%;
+}
+
+/* Cross-plugin list */
+.cwp-promo__plugins {
+	margin: 0 0 11px;
+	padding: 0;
+	list-style: none;
+	font-size: 12.5px;
+}
+
+.cwp-promo__plugins li {
+	padding: 5px 0;
+	border-top: 1px solid #f1f1f1;
+}
+
+.cwp-promo__plugins li:first-child {
+	border-top: 0;
+}
+
+.cwp-promo__plugins a {
+	/* Take the card's own darkened step rather than the WP admin blue, so the
+	   list reads as part of the card it sits in. --cwp-fill is used, not
+	   --cwp-stripe: the brand hex is chosen to be visible as a 3px edge and
+	   sits around 2:1 on white, which fails AA as text. The darkened step is
+	   the pair member measured for text contrast (primary 4.60:1). */
+	color: var(--cwp-fill, #2271b1);
+	text-decoration: none;
+}
+
+.cwp-promo__plugins a:hover {
+	text-decoration: underline;
+}
+
+/* Licence status */
+.cwp-promo__license {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.cwp-promo__key {
+	color: #646970;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 11.5px;
+}
+
+.cwp-promo__pill {
+	padding: 2px 8px;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	font-size: 10.5px;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+.cwp-promo__pill.is-ok {
+	background: #edfaef;
+	border-color: #b8e6c0;
+	color: #00700f;
+}
+
+.cwp-promo__pill.is-warn {
+	background: #fcf5e6;
+	border-color: #ecd9ae;
+	color: #8a6116;
+}
+
+.cwp-promo__pill.is-bad {
+	background: #fcefef;
+	border-color: #eec4c4;
+	color: #8a1f1f;
+}
+
+.cwp-promo__note {
+	margin-top: 9px;
+}
+
+/* Byline strip — no title row, so the split row carries no top border. */
+.cwp-promo__row--byline {
+	padding-top: 0;
+	border-top: 0;
+}
+
+.cwp-promo__row--byline .cwp-promo__text {
+	color: #646970;
+}
+
+/* Narrow columns and the stacked layout below the host's breakpoint. */
+@media screen and (max-width: 782px) {
+	.cwp-promo__row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+
+	.cwp-promo__btn {
+		flex: 0 0 auto;
+		width: 100%;
+	}
+}
